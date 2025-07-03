@@ -1,0 +1,511 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f7f6; /* Cor de fundo primária existente como fallback */
+    /*
+     * Dica: Para um background interessante que combine, você pode usar:
+     * 1. Uma imagem sutil com um padrão abstrato em tons de cinza claro e azul bem claro,
+     * com algumas linhas geométricas discretas, criando uma atmosfera moderna e organizada.
+     * Procure por "subtle abstract background" ou "geometric light background".
+     * 2. Um gradiente linear suave. Exemplo: background: linear-gradient(to right, #e0f2f7, #f0f7f9);
+     */
+    background-image: url('caminho/para/sua-imagem-de-fundo.jpg'); /* Substitua pelo caminho da sua imagem */
+    background-size: cover; /* Garante que a imagem cubra toda a área */
+    background-repeat: no-repeat; /* Evita a repetição da imagem */
+    background-attachment: fixed; /* Mantém a imagem fixa enquanto a página rola */
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+}
+
+.container {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 1200px;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 30px;
+}
+
+#addTaskForm {
+    display: flex;
+    margin-bottom: 20px;
+    gap: 10px;
+    flex-wrap: wrap; /* Permite que os inputs quebrem linha em telas menores */
+    justify-content: center; /* Centraliza os itens do formulário */
+}
+
+#addTaskForm input[type="text"],
+#addTaskForm input[type="date"],
+#addTaskForm select {
+    flex-grow: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+    min-width: 150px; /* Para que os inputs não fiquem muito pequenos */
+}
+
+#addTaskForm button {
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+#addTaskForm button:hover {
+    background-color: #218838;
+}
+
+.manage-responsibles-link {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.manage-responsibles-link a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.manage-responsibles-link a:hover {
+    color: #0056b3;
+    text-decoration: underline;
+}
+
+.board {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.column {
+    background-color: #f0f2f5;
+    border-radius: 8px;
+    padding: 15px;
+    flex: 1;
+    min-width: 300px;
+    max-width: 380px; /* Limita a largura da coluna para melhor visualização */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    min-height: 300px;
+    border: 2px dashed transparent; /* Para o efeito de dragover */
+    display: flex;
+    flex-direction: column;
+}
+
+.column.drag-over {
+    border-color: #007bff;
+}
+
+.column h2 {
+    text-align: center;
+    color: #555;
+    margin-top: 0;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+}
+
+.task-list {
+    min-height: 10px; /* Para permitir o drop em colunas vazias */
+    flex-grow: 1; /* Para que a lista ocupe o espaço restante */
+}
+
+.task-card {
+    background-color: #ffffff;
+    border: 1px solid #eee;
+    border-radius: 6px;
+    padding: 12px;
+    margin-bottom: 10px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: grab;
+    transition: transform 0.1s ease-in-out;
+}
+
+.task-card:active {
+    cursor: grabbing;
+    transform: scale(1.02);
+}
+
+.task-card p {
+    margin: 0 0 5px 0;
+    color: #333;
+}
+
+.task-card .card-title {
+    font-weight: bold;
+    font-size: 1.1em;
+    margin-bottom: 8px; /* Espaço após o título */
+}
+
+.task-card .card-responsible {
+    font-size: 0.9em;
+    color: #666;
+    margin-bottom: 5px; /* Espaço após o responsável */
+}
+
+.task-card .card-responsible span {
+    font-weight: bold;
+    color: #444;
+}
+
+.card-dates {
+    font-size: 0.85em;
+    color: #888;
+    margin-bottom: 10px !important; /* Mais espaçamento antes dos botões */
+}
+
+.card-dates span {
+    font-weight: bold;
+    color: #555;
+}
+
+.card-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 5px;
+    flex-wrap: wrap;
+    margin-top: 5px;
+}
+
+/* Dropdown Styles */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropbtn {
+    background-color: #007bff;
+    color: white;
+    padding: 8px 12px;
+    font-size: 14px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.dropbtn:hover, .dropbtn:focus {
+    background-color: #0056b3;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    border-radius: 4px;
+    right: 0; /* Alinha o dropdown à direita do botão */
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    transition: background-color 0.1s ease;
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* Estilos dos botões de Editar e Apagar */
+.edit-btn, .delete-btn {
+    padding: 8px 12px;
+    font-size: 14px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.edit-btn {
+    background-color: #ffc107; /* Amarelo */
+    color: #333;
+}
+
+.edit-btn:hover {
+    background-color: #e0a800;
+}
+
+.delete-btn {
+    background-color: #dc3545; /* Vermelho */
+    color: white;
+}
+
+.delete-btn:hover {
+    background-color: #c82333;
+}
+
+/* Modal Styles */
+.modal {
+    display: none; /* Escondido por padrão */
+    position: fixed; /* Fica no topo da página */
+    z-index: 1000; /* Acima de tudo */
+    left: 0;
+    top: 0;
+    width: 100%; /* Largura total */
+    height: 100%; /* Altura total */
+    overflow: auto; /* Permite scroll se o conteúdo for muito grande */
+    background-color: rgba(0,0,0,0.4); /* Fundo semi-transparente */
+    display: flex; /* Usado para centralizar o conteúdo quando visível */
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    border-radius: 8px;
+    width: 80%; /* Pode ajustar a largura */
+    max-width: 500px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    position: relative;
+}
+
+.close-button {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    position: absolute;
+    right: 15px;
+    top: 10px;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal-content h2 {
+    margin-top: 0;
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.modal-content form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.modal-content label {
+    font-weight: bold;
+    color: #555;
+    margin-bottom: -5px; /* Ajusta espaço entre label e input */
+}
+
+.modal-content input[type="text"],
+.modal-content input[type="date"],
+.modal-content select {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+    width: calc(100% - 22px); /* Para compensar padding e border */
+    box-sizing: border-box; /* Garante que padding e border sejam incluídos na largura */
+}
+
+.modal-content button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    margin-top: 10px;
+}
+
+.modal-content button:hover {
+    background-color: #0056b3;
+}
+
+/* Estilos para a página de responsáveis (responsibles.php) */
+.responsible-container {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 600px;
+    margin: 20px auto;
+}
+.responsible-container h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
+.responsible-form {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+.responsible-form input[type="text"] {
+    flex-grow: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+.responsible-form button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.responsible-form button:hover {
+    background-color: #0056b3;
+}
+.responsible-list {
+    list-style: none;
+    padding: 0;
+}
+.responsible-list li {
+    background-color: #f9f9f9;
+    border: 1px solid #eee;
+    padding: 10px 15px;
+    margin-bottom: 8px;
+    border-radius: 4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.responsible-list li span {
+    font-weight: bold;
+    color: #333;
+}
+.responsible-list button {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.responsible-list button:hover {
+    background-color: #c82333;
+}
+.message-area {
+    text-align: center;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+.success-message {
+    color: #28a745;
+}
+.error-message {
+    color: #dc3545;
+}
+.back-link {
+    display: block;
+    text-align: center;
+    margin-top: 20px;
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+}
+.back-link:hover {
+    text-decoration: underline;
+}
+
+/* Media Queries para Responsividade */
+@media (max-width: 768px) {
+    .board {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .column {
+        min-width: unset;
+        width: 100%;
+        max-width: 400px; /* Limita a largura em telas menores para melhor leitura */
+        margin-bottom: 20px;
+    }
+
+    #addTaskForm {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    #addTaskForm input[type="text"],
+    #addTaskForm input[type="date"],
+    #addTaskForm select,
+    #addTaskForm button {
+        width: 100%;
+        min-width: unset;
+    }
+
+    .card-actions {
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 8px;
+    }
+
+    .card-actions button,
+    .dropdown {
+        width: 100%;
+        text-align: center;
+    }
+
+    .dropdown-content {
+        left: 0;
+        right: 0;
+        min-width: 100%;
+    }
+}
+
+/* ... (Seus estilos existentes) ... */
+
+/* Novas classes para colorir os cards */
+.task-card.task-due-today {
+    background-color: #fff3cd; /* Amarelo claro */
+    border-left: 5px solid #ffc107; /* Borda amarela mais forte */
+}
+
+.task-card.task-overdue {
+    background-color: #f8d7da; /* Vermelho claro */
+    border-left: 5px solid #dc3545; /* Borda vermelha mais forte */
+}
+
+/* Garante que o card "Feito" não tenha bordas coloridas se arrastado para fora e depois para "Feito" novamente */
+.column#feito .task-card {
+    border-left: 1px solid #eee; /* Borda padrão */
+    background-color: #ffffff; /* Fundo padrão */
+}
+
+/* ... (O restante do seu CSS) ... */
