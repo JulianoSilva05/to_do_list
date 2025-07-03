@@ -1,14 +1,10 @@
 body {
     font-family: Arial, sans-serif;
     background-color: #f4f7f6; /* Cor de fundo primária existente como fallback */
-    /*
-     * Dica: Para um background interessante que combine, você pode usar:
-     * 1. Uma imagem sutil com um padrão abstrato em tons de cinza claro e azul bem claro,
-     * com algumas linhas geométricas discretas, criando uma atmosfera moderna e organizada.
-     * Procure por "subtle abstract background" ou "geometric light background".
-     * 2. Um gradiente linear suave. Exemplo: background: linear-gradient(to right, #e0f2f7, #f0f7f9);
-     */
-    background-image: url('caminho/para/sua-imagem-de-fundo.jpg'); /* Substitua pelo caminho da sua imagem */
+    /*background-image: url('/imagem-de-fundo.jpg'); /* Substitua pelo caminho da sua imagem */
+    background-image: linear-gradient(#4CAF50, #2196F3); /* Verde para Azul */
+    height: 200px; /* Apenas para visualização */
+    width: 100%;
     background-size: cover; /* Garante que a imagem cubra toda a área */
     background-repeat: no-repeat; /* Evita a repetição da imagem */
     background-attachment: fixed; /* Mantém a imagem fixa enquanto a página rola */
@@ -39,8 +35,8 @@ h1 {
     display: flex;
     margin-bottom: 20px;
     gap: 10px;
-    flex-wrap: wrap; /* Permite que os inputs quebrem linha em telas menores */
-    justify-content: center; /* Centraliza os itens do formulário */
+    flex-wrap: wrap; 
+    justify-content: center; 
 }
 
 #addTaskForm input[type="text"],
@@ -51,7 +47,7 @@ h1 {
     border: 1px solid #ddd;
     border-radius: 4px;
     font-size: 16px;
-    min-width: 150px; /* Para que os inputs não fiquem muito pequenos */
+    min-width: 150px;
 }
 
 #addTaskForm button {
@@ -99,10 +95,10 @@ h1 {
     padding: 15px;
     flex: 1;
     min-width: 300px;
-    max-width: 380px; /* Limita a largura da coluna para melhor visualização */
+    max-width: 380px; 
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
     min-height: 300px;
-    border: 2px dashed transparent; /* Para o efeito de dragover */
+    border: 2px dashed transparent;
     display: flex;
     flex-direction: column;
 }
@@ -121,8 +117,8 @@ h1 {
 }
 
 .task-list {
-    min-height: 10px; /* Para permitir o drop em colunas vazias */
-    flex-grow: 1; /* Para que a lista ocupe o espaço restante */
+    min-height: 10px; 
+    flex-grow: 1; 
 }
 
 .task-card {
@@ -152,13 +148,13 @@ h1 {
 .task-card .card-title {
     font-weight: bold;
     font-size: 1.1em;
-    margin-bottom: 8px; /* Espaço após o título */
+    margin-bottom: 8px; 
 }
 
 .task-card .card-responsible {
     font-size: 0.9em;
     color: #666;
-    margin-bottom: 5px; /* Espaço após o responsável */
+    margin-bottom: 5px; 
 }
 
 .task-card .card-responsible span {
@@ -169,7 +165,7 @@ h1 {
 .card-dates {
     font-size: 0.85em;
     color: #888;
-    margin-bottom: 10px !important; /* Mais espaçamento antes dos botões */
+    margin-bottom: 10px !important; 
 }
 
 .card-dates span {
@@ -214,7 +210,7 @@ h1 {
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
     border-radius: 4px;
-    right: 0; /* Alinha o dropdown à direita do botão */
+    right: 0; 
 }
 
 .dropdown-content a {
@@ -244,7 +240,7 @@ h1 {
 }
 
 .edit-btn {
-    background-color: #ffc107; /* Amarelo */
+    background-color: #ffc107; 
     color: #333;
 }
 
@@ -253,7 +249,7 @@ h1 {
 }
 
 .delete-btn {
-    background-color: #dc3545; /* Vermelho */
+    background-color: #dc3545; 
     color: white;
 }
 
@@ -507,5 +503,3 @@ h1 {
     border-left: 1px solid #eee; /* Borda padrão */
     background-color: #ffffff; /* Fundo padrão */
 }
-
-/* ... (O restante do seu CSS) ... */
